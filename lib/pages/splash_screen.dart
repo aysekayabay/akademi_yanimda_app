@@ -2,7 +2,7 @@ import 'package:akademi_yanimda/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'login_screen.dart';
+import 'auth_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
         Duration(seconds: 2),
         () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-              return FirebaseAuth.instance.currentUser != null ? HomePage(title: 'Akademi Yanımda') : LoginScreen();
+              return FirebaseAuth.instance.currentUser != null ? HomePage(title: 'Akademi Yanımda') : AuthScreen();
             })));
   }
 

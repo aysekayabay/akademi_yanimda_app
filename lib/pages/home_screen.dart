@@ -1,4 +1,4 @@
-import 'package:akademi_yanimda/pages/login_screen.dart';
+import 'package:akademi_yanimda/pages/auth_screen.dart';
 import 'package:akademi_yanimda/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
                 await signOutWithGoogle();
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) {
-                    return LoginScreen();
+                    return AuthScreen();
                   },
                 ));
               },
