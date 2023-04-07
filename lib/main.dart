@@ -17,8 +17,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Akademi Yanımda',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            appBarTheme: AppBarTheme(
+                elevation: 0,
+                color: Colors.transparent,
+                iconTheme: IconThemeData(
+                  color: Color(0xff525F7F),
+                ))),
         home: SplashScreen());
   }
 }
