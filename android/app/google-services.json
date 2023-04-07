@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "899947441135",
+    "project_id": "akademi-yanimda",
+    "storage_bucket": "akademi-yanimda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899947441135:android:781708b3a704af0b78e41a",
+        "android_client_info": {
+          "package_name": "com.example.akademi_yanimda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899947441135-iovh5h9q2d42bb1tgekn82uhnphpgfb5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.akademi_yanimda",
+            "certificate_hash": "3d53546cd5be75bb4320b038a47bb950a5d011ed"
+          }
+        },
+        {
+          "client_id": "899947441135-bj09tk8j4fhe6totn7943424p9a57ff4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMH-LZKqDkF4oZPZG4NZdnigBmCd1jXzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899947441135-bj09tk8j4fhe6totn7943424p9a57ff4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
