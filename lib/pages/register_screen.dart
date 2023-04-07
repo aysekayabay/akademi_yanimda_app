@@ -1,3 +1,7 @@
+import 'package:akademi_yanimda/pages/home_screen.dart';
+import 'package:akademi_yanimda/pages/video_content_screen.dart';
+import 'package:akademi_yanimda/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -17,8 +21,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isSaving = false;
   @override
   Widget build(BuildContext context) {
-    var textStyle = TextStyle(fontFamily: 'Poppins', color: Color(0xff525F7F), fontSize: 18, fontWeight: FontWeight.w500);
-    var hintStyle = TextStyle(color: Color(0xffA1B2CF), fontFamily: 'Poppins', fontWeight: FontWeight.w900, fontSize: 16);
     var buttonDecoration = BoxDecoration(color: Color(0xff686BFF), borderRadius: BorderRadius.all(Radius.circular(10)));
     var buttonTextStyle = TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500);
     var headerStyle = TextStyle(color: Color(0xff525F7F), fontFamily: 'Poppins', fontWeight: FontWeight.w700, fontSize: 25);
@@ -39,63 +41,61 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(children: [
-                  TextFormField(
-                    style: textStyle,
-                    controller: fullnameController,
-                    decoration: InputDecoration(
-                        label: Text(
-                      "Ad Soyad",
-                      style: hintStyle,
-                    )),
-                    onSaved: (newValue) {
-                      registerForm['fullName'];
-                    },
-                  ),
-                  SizedBox(height: 5),
-                  TextFormField(
-                    style: textStyle,
-                    controller: nicknameController,
-                    decoration: InputDecoration(
-                        label: Text(
-                      "Kullanıcı Adı",
-                      style: hintStyle,
-                    )),
-                    onSaved: (newValue) {
-                      registerForm['nickName'];
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: TextFormField(
-                      style: textStyle,
+                  CustomAuthField(
+                      label: "Ad Soyad",
+                      controller: fullnameController,
+                      validator: (p0) {
+                        if (p0?.isNotEmpty != true) {
+                          return 'Ad soyad girmeniz gerekli';
+                        }
+                        return null;
+                      },
+                      onSaved: (newValue) {
+                        registerForm['fullName'];
+                      }),
+                  CustomAuthField(
+                      label: "Kullanıcı Adı",
+                      controller: nicknameController,
+                      validator: (p0) {
+                        if (p0?.isNotEmpty != true) {
+                          return 'Kullanıcı adı girmeniz gerekli';
+                        }
+                        return null;
+                      },
+                      onSaved: (newValue) {
+                        registerForm['nickName'];
+                      }),
+                  CustomAuthField(
+                      label: "Mail",
+                      validator: (p0) {
+                        if (p0?.isNotEmpty != true || (p0?.isNotEmpty == true && !p0!.contains('@')) || (p0?.isNotEmpty == true && !p0!.contains('.'))) {
+                          return 'Gerçek bir mail girmeniz gerekli';
+                        }
+                        return null;
+                      },
                       controller: mailController,
-                      decoration: InputDecoration(
-                          label: Text(
-                        "Mail",
-                        style: hintStyle,
-                      )),
                       onSaved: (newValue) {
                         registerForm['mail'];
+                      }),
+                  CustomAuthField(
+                      label: "Şifre",
+                      validator: (p0) {
+                        if (p0?.isNotEmpty != true || (p0?.isNotEmpty == true && p0!.length < 6)) {
+                          return 'Girdiğiniz şifre en az 6 karakter içermelidir.';
+                        }
+                        return null;
                       },
-                    ),
-                  ),
-                  TextFormField(
-                    style: textStyle,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                        label: Text(
-                      "Şifre",
-                      style: hintStyle,
-                    )),
-                    onSaved: (newValue) {
-                      registerForm['password'];
-                    },
-                  ),
-                  SizedBox(height: 50),
+                      controller: passwordController,
+                      onSaved: (newValue) {
+                        registerForm['password'];
+                      }),
                   isSaving
                       ? Center(child: CircularProgressIndicator())
                       : InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            setState(() {
+                              isSaving = true;
+                            });
                             final formState = _formKey.currentState;
                             if (formState == null) return;
 
@@ -103,6 +103,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               formState.save();
                               print(registerForm);
                             }
+                            int success = await AuthService.instance.register(context, mailController.text, passwordController.text);
+                            if (success == 1) {
+                              await FirebaseAuth.instance.currentUser?.updateDisplayName(fullnameController.text);
+                              setState(() {
+                                isSaving = false;
+                              });
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                builder: (context) {
+                                  return HomePage();
+                                },
+                              ));
+                            }
+                            setState(() {
+                              isSaving = false;
+                            });
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,
@@ -122,5 +137,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+}
+
+class CustomAuthField extends StatelessWidget {
+  const CustomAuthField({super.key, required this.controller, required this.onSaved, required this.label, this.validator});
+  final String label;
+  final TextEditingController controller;
+  final void Function(String?)? onSaved;
+  final String? Function(String?)? validator;
+
+  @override
+  Widget build(BuildContext context) {
+    var textStyle = TextStyle(fontFamily: 'Poppins', color: Color(0xff525F7F), fontSize: 18, fontWeight: FontWeight.w500);
+    var hintStyle = TextStyle(color: Color(0xffA1B2CF), fontFamily: 'Poppins', fontWeight: FontWeight.w900, fontSize: 16);
+    return TextFormField(
+        validator: validator,
+        style: textStyle,
+        controller: controller,
+        decoration: InputDecoration(
+            label: Text(
+          label,
+          style: hintStyle,
+        )),
+        onSaved: onSaved);
   }
 }

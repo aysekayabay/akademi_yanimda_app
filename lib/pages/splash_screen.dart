@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
         Duration(seconds: 2),
         () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-              return FirebaseAuth.instance.currentUser != null ? HomePage(title: 'Akademi Yanımda') : AuthScreen();
+              return FirebaseAuth.instance.currentUser != null ? HomePage() : AuthScreen();
             })));
   }
 

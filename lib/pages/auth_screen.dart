@@ -1,6 +1,8 @@
 import 'package:akademi_yanimda/pages/home_screen.dart';
 import 'package:akademi_yanimda/pages/login_screen.dart';
 import 'package:akademi_yanimda/pages/register_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
@@ -16,7 +18,7 @@ class _AuthScreenState extends State<AuthScreen> {
   navigateToHome() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return HomePage(title: "Akademi Yanımda");
+        return HomePage();
       },
     ));
   }
@@ -70,6 +72,11 @@ class _AuthScreenState extends State<AuthScreen> {
               ElevatedButton(
                   onPressed: () async {
                     await signInWithGoogle();
+                    String uid = FirebaseAuth.instance.currentUser!.uid;
+                    await FirebaseFirestore.instance.collection('kullanicilar').doc(uid).set(
+                      {'girisYaptiMi': true, 'sonGirisTarihi': FieldValue.serverTimestamp()},
+                      SetOptions(merge: true),
+                    );
                     navigateToHome();
                   },
                   child: Text("Google ile Giriş Yap"))

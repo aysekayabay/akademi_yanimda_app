@@ -1,3 +1,4 @@
+import 'package:akademi_yanimda/firebase/firestore_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,11 @@ class AuthService {
     try {
       UserCredential user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
       if (user.user != null) {
-        // await FirestoreManager().firestoreSendDataMap(
-        //   collectionID: 'user',
-        //   docID: user.user!.uid,
-        //   data: {'email': email, 'userID': user.user!.uid, 'created': DateTime.now()},
-        // );
+        await FirestoreManager().firestoreSendDataMap(
+          collectionID: 'user',
+          docID: user.user!.uid,
+          data: {'email': email, 'userID': user.user!.uid, 'created': DateTime.now()},
+        );
         uid = user.user!.uid;
         // userData = await FirestoreManager().firestoreGetDocument(collectionID: "user", documentID: user.user!.uid);
         return 1;
@@ -99,19 +100,15 @@ class AuthService {
 }
 
 Future<UserCredential> signInWithGoogle() async {
-  // Trigger the authentication flow
   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-  // Obtain the auth details from the request
   final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-  // Create a new credential
   final credential = GoogleAuthProvider.credential(
     accessToken: googleAuth?.accessToken,
     idToken: googleAuth?.idToken,
   );
 
-  // Once signed in, return the UserCredential
   return await FirebaseAuth.instance.signInWithCredential(credential);
 }
 
