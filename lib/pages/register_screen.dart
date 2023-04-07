@@ -1,6 +1,7 @@
 import 'package:akademi_yanimda/pages/home_screen.dart';
 import 'package:akademi_yanimda/pages/video_content_screen.dart';
 import 'package:akademi_yanimda/services/auth_service.dart';
+import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +22,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isSaving = false;
   @override
   Widget build(BuildContext context) {
-    var buttonDecoration = BoxDecoration(color: Color(0xff686BFF), borderRadius: BorderRadius.all(Radius.circular(10)));
-    var buttonTextStyle = TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500);
-    var headerStyle = TextStyle(color: Color(0xff525F7F), fontFamily: 'Poppins', fontWeight: FontWeight.w700, fontSize: 25);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -33,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: const EdgeInsets.symmetric(vertical: 50),
               child: Text(
                 "Kayıt Ol",
-                style: headerStyle,
+                style: Styles.headerStyle,
               ),
             ),
             Form(
@@ -122,11 +120,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Container(
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.symmetric(vertical: 20),
-                            decoration: buttonDecoration,
+                            decoration: Styles.buttonDecoration,
                             child: Center(
                               child: Text(
                                 "Kayıt Ol",
-                                style: buttonTextStyle,
+                                style: Styles.buttonTextStyle,
                               ),
                             ),
                           ))

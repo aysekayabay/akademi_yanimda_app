@@ -1,6 +1,7 @@
 import 'package:akademi_yanimda/pages/home_screen.dart';
 import 'package:akademi_yanimda/pages/login_screen.dart';
 import 'package:akademi_yanimda/pages/register_screen.dart';
+import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,6 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var buttonColor = Color(0xff686BFF);
-    var buttonDecoration = BoxDecoration(color: buttonColor, borderRadius: BorderRadius.all(Radius.circular(10)));
-    var buttonTextStyle = TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500);
     return Scaffold(
       body: Center(
         child: Padding(
@@ -40,11 +38,11 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  decoration: buttonDecoration,
+                  decoration: Styles.buttonDecoration,
                   child: Center(
                     child: Text(
                       "Giriş Yap",
-                      style: buttonTextStyle,
+                      style: Styles.buttonTextStyle,
                     ),
                   ),
                 ),
@@ -57,11 +55,11 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  decoration: buttonDecoration.copyWith(color: Colors.transparent, border: Border.all(color: buttonColor)),
+                  decoration: Styles.buttonDecoration.copyWith(color: Colors.transparent, border: Border.all(color: Styles.buttonColor)),
                   child: Center(
                     child: Text(
                       "Kayıt Ol",
-                      style: buttonTextStyle.copyWith(color: buttonColor),
+                      style: Styles.buttonTextStyle.copyWith(color: Styles.buttonColor),
                     ),
                   ),
                 ),
