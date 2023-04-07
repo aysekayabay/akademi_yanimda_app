@@ -139,7 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 }
 
 class CustomAuthField extends StatelessWidget {
-  const CustomAuthField({super.key, required this.controller, required this.onSaved, required this.label, this.validator});
+  const CustomAuthField({super.key, required this.controller, this.onSaved, required this.label, this.validator});
   final String label;
   final TextEditingController controller;
   final void Function(String?)? onSaved;
