@@ -31,42 +31,27 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Hesabınız var mı?", style: Styles.headerStyle),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 50),
-              child: Text("Gelişmeye devam et", style: Styles.subHeaderStyle),
-            ),
-            InkWell(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen())),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(vertical: 20),
-                decoration: Styles.buttonDecoration,
-                child: Center(
-                  child: Text("Giriş Yap", style: Styles.buttonTextStyle),
-                ),
-              ),
+            HeaderText(title: "Hesabınız var mı?", bottomPadding: 10),
+            SubHeaderText(title: "Gelişmeye devam et", bottomPadding: 20),
+            MainButton(
+              isFilled: true,
+              title: "Giriş Yap",
+              padding: EdgeInsets.symmetric(vertical: 20),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
             ),
             Divider(height: 80),
-            Text("Buralarda yeni misin?", style: Styles.headerStyle),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 50),
-              child: Text("Öğrenmeye hemen başla", style: Styles.subHeaderStyle),
-            ),
-            InkWell(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen())),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
+            HeaderText(title: "Buralarda yeni misin?", bottomPadding: 10),
+            SubHeaderText(title: "Öğrenmeye hemen başla", bottomPadding: 20),
+            MainButton(
+                isFilled: false,
                 padding: EdgeInsets.symmetric(vertical: 20),
-                decoration: Styles.buttonDecoration.copyWith(color: Colors.transparent, border: Border.all(color: Styles.buttonColor)),
-                child: Center(
-                  child: Text(
-                    "Kayıt Ol",
-                    style: Styles.buttonTextStyle.copyWith(color: Styles.buttonColor),
-                  ),
-                ),
-              ),
-            ),
+                title: "Kayıt Ol",
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
+                }),
+            SizedBox(height: 50),
             GoogleSignButton()
           ],
         ),
@@ -86,5 +71,81 @@ class _AuthScreenState extends State<AuthScreen> {
           navigateToHome();
         },
         child: Text("Google ile Giriş Yap"));
+  }
+}
+
+class SubHeaderText extends StatelessWidget {
+  final double topPadding;
+  final double bottomPadding;
+  final String title;
+  const SubHeaderText({
+    super.key,
+    required this.title,
+    this.topPadding = 0,
+    this.bottomPadding = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: topPadding, bottom: bottomPadding),
+      child: Text(title, style: Styles.subHeaderStyle),
+    );
+  }
+}
+
+class HeaderText extends StatelessWidget {
+  final String title;
+  final double topPadding;
+  final double bottomPadding;
+  const HeaderText({
+    super.key,
+    required this.title,
+    this.topPadding = 0,
+    this.bottomPadding = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: topPadding, bottom: bottomPadding),
+      child: Text(title, style: Styles.headerStyle),
+    );
+  }
+}
+
+class MainButton extends StatelessWidget {
+  final bool isFilled;
+  final void Function()? onTap;
+  final String title;
+  final EdgeInsetsGeometry? padding;
+  const MainButton({
+    super.key,
+    this.padding,
+    required this.isFilled,
+    required this.title,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: padding,
+        decoration: BoxDecoration(
+          border: isFilled ? null : Border.all(color: Styles.buttonColor),
+          color: isFilled ? Styles.buttonColor : Colors.transparent,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: Styles.buttonTextStyle.copyWith(color: isFilled ? Colors.white : Styles.buttonColor),
+          ),
+        ),
+      ),
+    );
   }
 }
