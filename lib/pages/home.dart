@@ -4,18 +4,20 @@ import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
+class HomeBar extends StatefulWidget {
+  const HomeBar({super.key});
 
   @override
-  State<BottomBar> createState() => BottomBarState();
+  State<HomeBar> createState() => HomeBarState();
 }
 
-class BottomBarState extends State<BottomBar> {
+class HomeBarState extends State<HomeBar> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     LessonsScreen(),
-    Text("Home1"),
+    Column(
+      children: [SizedBox(height: 100), Image(image: AssetImage("assets/images/Card.png"))],
+    ),
     Text("Home2"),
     ProfileScreen(),
   ];

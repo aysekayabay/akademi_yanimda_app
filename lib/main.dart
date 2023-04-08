@@ -1,4 +1,4 @@
-import 'package:akademi_yanimda/pages/home.dart';
+import 'package:akademi_yanimda/pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +23,6 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(
                   color: Color(0xff525F7F),
                 ))),
-        home: BottomBar());
+        home: SplashScreen());
   }
 }

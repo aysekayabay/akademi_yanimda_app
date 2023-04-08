@@ -1,3 +1,4 @@
+import 'package:akademi_yanimda/pages/home.dart';
 import 'package:akademi_yanimda/pages/login_screen.dart';
 import 'package:akademi_yanimda/pages/profile_screen.dart';
 import 'package:akademi_yanimda/pages/register_screen.dart';
@@ -18,8 +19,7 @@ class _AuthScreenState extends State<AuthScreen> {
   navigateToHome() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return ProfileScreen();
-        // return HomePage();
+        return HomeBar();
       },
     ));
   }
@@ -50,7 +50,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
                 }),
-            SizedBox(height: 50),
+            SizedBox(height: 100),
             GoogleSignButton()
           ],
         ),
@@ -59,8 +59,8 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget GoogleSignButton() {
-    return ElevatedButton(
-        onPressed: () async {
+    return InkWell(
+        onTap: () async {
           await signInWithGoogle();
           String uid = FirebaseAuth.instance.currentUser!.uid;
           await FirebaseFirestore.instance.collection('kullanicilar').doc(uid).set(
@@ -69,7 +69,9 @@ class _AuthScreenState extends State<AuthScreen> {
           );
           navigateToHome();
         },
-        child: Text("Google ile Giriş Yap"));
+        child: Image(
+          image: AssetImage("assets/images/google.png"),
+        ));
   }
 }
 

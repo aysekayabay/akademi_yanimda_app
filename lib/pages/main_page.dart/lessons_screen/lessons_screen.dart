@@ -116,6 +116,7 @@ class name extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
+            SizedBox(height: 5),
             Text(
               "Kazanılabilir Koleksiyonlar",
               style: GoogleFonts.rubik(
