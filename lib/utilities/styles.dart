@@ -10,6 +10,8 @@ class Styles {
   static const baseOrange = Color(0xffFBF1E3);
   static const classicTextStyle = TextStyle(color: darkGrey, fontFamily: 'Poppins', fontWeight: FontWeight.w500, fontSize: 18);
   static const buttonColor = Color(0xff686BFF);
+  static const cardBlue = Color(0xff466CFF);
+  static const cardPinh = Color(0xffEE97BC);
   static const lightPink = Color(0xffDED7F1);
   static const darkPurp = Color(0xff5b37b7);
   static const hintStyle = TextStyle(fontFamily: 'Poppins', color: lightGrey, fontSize: 16, fontWeight: FontWeight.w900);
