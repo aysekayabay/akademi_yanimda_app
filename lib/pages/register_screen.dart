@@ -1,5 +1,4 @@
 import 'package:akademi_yanimda/pages/home_screen.dart';
-import 'package:akademi_yanimda/pages/video_content_screen.dart';
 import 'package:akademi_yanimda/services/auth_service.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';

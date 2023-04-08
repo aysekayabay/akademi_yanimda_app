@@ -14,6 +14,7 @@ class _VideoContentState extends State<VideoContent> {
    late YoutubePlayerController _controller;
   @override
   void initState() {
+    super.initState();
     final videoID = YoutubePlayer.convertUrlToId(videoURL);
     _controller = YoutubePlayerController(
         initialVideoId: videoID!,
@@ -21,6 +22,7 @@ class _VideoContentState extends State<VideoContent> {
   }
   @override
   void dispose() {
+    super.dispose();
 _controller.dispose();
   }
 
