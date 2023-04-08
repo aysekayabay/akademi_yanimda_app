@@ -23,7 +23,7 @@ class BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 18),
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Padding(

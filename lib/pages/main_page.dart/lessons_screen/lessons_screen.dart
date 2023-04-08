@@ -1,4 +1,6 @@
 import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_card.dart';
+import 'package:akademi_yanimda/utilities/styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,13 +27,14 @@ class _LessonsScreenState extends State<LessonsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var user = FirebaseAuth.instance.currentUser;
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
         children: [
           SizedBox(height: 80),
           // Search(controller: _controller),
-          name(),
+          name(title: user!.displayName!),
           bar(),
           Column(
             children: [
@@ -47,9 +50,9 @@ class _LessonsScreenState extends State<LessonsScreen> {
 
   Padding bar() {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Container(
-        width: 50,
+        width: MediaQuery.of(context).size.width,
         constraints: BoxConstraints(minWidth: 300, maxHeight: 5),
         decoration: BoxDecoration(gradient: LinearGradient(stops: [0.2, 0.1], begin: Alignment.centerLeft, end: Alignment.centerRight, colors: [Colors.greenAccent, Colors.grey.shade300])),
       ),
@@ -91,33 +94,51 @@ class Search extends StatelessWidget {
 }
 
 class name extends StatelessWidget {
+  final String title;
   const name({
     super.key,
+    required this.title,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      trailing: Icon(
-        Icons.price_change,
-        size: 45,
-      ),
-      title: Text(
-        "Ali Osman Yalçın",
-        style: GoogleFonts.rubik(
-          color: Colors.blueGrey[700],
-          fontSize: 22,
-          fontWeight: FontWeight.w700,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: GoogleFonts.rubik(
+                color: Styles.darkGrey,
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Text(
+              "Kazanılabilir Koleksiyonlar",
+              style: GoogleFonts.rubik(
+                color: Styles.lightGrey,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
-      ),
-      subtitle: Text(
-        "Kazanablir Koleksiyonlar",
-        style: GoogleFonts.rubik(
-          color: Colors.blueGrey[300],
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
+        InkWell(
+          // onTap: () => Navigator.of(context).push(route),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(color: Styles.baseOrange, shape: BoxShape.circle),
+            child: Image(
+              image: AssetImage("assets/images/cup.png"),
+              height: 40,
+              width: 40,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
