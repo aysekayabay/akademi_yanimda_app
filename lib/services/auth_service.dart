@@ -46,52 +46,18 @@ class AuthService {
       UserCredential user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       if (user != null) {
         uid = user.user!.uid;
-        // userData = await FirestoreManager().firestoreGetDocument(collectionID: "user", documentID: user.user!.uid);
+        userData = await FirestoreManager().firestoreGetDocument(collectionID: "user", documentID: user.user!.uid);
         return 1;
       } else {
         return 0;
       }
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
-        // case Languagekeys.loginExecptionCaseNotUser:
-        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //       content: Text(
-        //         Languagekeys.loginExecptionReturnNotUser,
-        //         style: TextStyleUtility.loginMain,
-        //       ),
-        //       backgroundColor: ColorUtility.brand));
-        //   break;
-        // case Languagekeys.loginExecptionCaseWrongPassword:
-        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //       content: Text(
-        //         Languagekeys.loginExecptionReturnWrongPassword,
-        //         style: TextStyleUtility.loginMain,
-        //       ),
-        //       backgroundColor: ColorUtility.brand));
-        //   break;
-        // case Languagekeys.loginExecptionCaseUnknown:
-        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //       content: Text(
-        //         Languagekeys.loginExecptionReturnUnkown,
-        //         style: TextStyleUtility.loginMain,
-        //       ),
-        //       backgroundColor: ColorUtility.brand));
-        //   break;
-        // case Languagekeys.loginExecptionCaseInvalidEmail:
-        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //       content: Text(
-        //         Languagekeys.loginExecptionReturnInvalidEmail,
-        //         style: TextStyleUtility.loginMain,
-        //       ),
-        //       backgroundColor: ColorUtility.brand));
-        // break;
         default:
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
               e.message.toString(),
-              // style: TextStyleUtility.loginMain,
             ),
-            // backgroundColor: ColorUtility.brand,
           ));
       }
       return -1;
