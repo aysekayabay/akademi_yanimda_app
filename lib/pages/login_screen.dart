@@ -1,4 +1,5 @@
-import 'package:akademi_yanimda/pages/home_screen.dart';
+import 'package:akademi_yanimda/pages/auth_screen.dart';
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_screen.dart';
 import 'package:akademi_yanimda/pages/register_screen.dart';
 import 'package:akademi_yanimda/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   navigateToHome() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return HomePage();
+        return LessonsScreen();
       },
     ));
   }
@@ -38,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height / 6),
                 CustomAuthField(controller: mailController, label: 'Email', onSaved: (p0) {}),
                 CustomAuthField(controller: passwordController, label: 'Şifre', onSaved: (p0) {}),
+                SizedBox(height: 50),
                 isSaving
                     ? Center(child: CircularProgressIndicator())
                     : InkWell(
@@ -56,19 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             isSaving = false;
                           });
                         },
-                        child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 100),
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(vertical: 20),
-                          decoration: Styles.buttonDecoration,
-                          child: Center(
-                            child: Text(
-                              "Giriş Yap",
-                              style: Styles.buttonTextStyle,
-                            ),
-                          ),
-                        ),
-                      )
+                        child: MainButton(isFilled: true, title: "Giriş Yap"))
               ],
             ),
           ),
