@@ -11,19 +11,24 @@ class VideoContent extends StatefulWidget {
 
 class _VideoContentState extends State<VideoContent> {
   final videoURL = YoutubeService.flutter[1];
-   late YoutubePlayerController _controller;
+  late YoutubePlayerController _controller;
   @override
   void initState() {
     super.initState();
     final videoID = YoutubePlayer.convertUrlToId(videoURL);
     _controller = YoutubePlayerController(
         initialVideoId: videoID!,
-        flags: YoutubePlayerFlags(autoPlay: false, mute: true, isLive: false,controlsVisibleAtStart: true));
+        flags: YoutubePlayerFlags(
+            autoPlay: false,
+            mute: true,
+            isLive: false,
+            controlsVisibleAtStart: true));
   }
+
   @override
   void dispose() {
     super.dispose();
-_controller.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -32,9 +37,12 @@ _controller.dispose();
       body: Center(
         child: Column(
           children: [
-            Text("buraya geri butonu gelecek"),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                    onPressed: () {}, icon: Icon(Icons.keyboard_arrow_left))),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             YoutubePlayer(
               controller: _controller,
@@ -43,6 +51,12 @@ _controller.dispose();
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        backgroundColor: Colors.purple.shade600,
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }

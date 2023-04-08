@@ -35,10 +35,9 @@ class _LessonsScreenState extends State<LessonsScreen> {
               bar(),
               Column(
                 children: [
-                  LessonCard(name_count: 0),
-                  LessonCard(name_count: 1),
-                  LessonCard(name_count: 0),
-                  LessonCard(name_count: 0),
+                  LessonCard(name_count: 0,arkaplan_rengi: Colors.indigoAccent),
+                  LessonCard(name_count: 1,arkaplan_rengi: Colors.lightGreen),
+                  LessonCard(name_count: 0,arkaplan_rengi: Colors.tealAccent),
                 ],
               )
             ],
