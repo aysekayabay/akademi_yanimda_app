@@ -1,4 +1,5 @@
-import 'package:akademi_yanimda/pages/home_screen.dart';
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_screen.dart';
+import 'package:akademi_yanimda/pages/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
         Duration(seconds: 2),
         () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-              return FirebaseAuth.instance.currentUser != null ? HomePage() : AuthScreen();
+              return FirebaseAuth.instance.currentUser != null ? LessonsScreen() : AuthScreen();
             })));
   }
 

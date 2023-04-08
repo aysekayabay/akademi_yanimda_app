@@ -1,5 +1,5 @@
-import 'package:akademi_yanimda/pages/home_screen.dart';
 import 'package:akademi_yanimda/pages/login_screen.dart';
+import 'package:akademi_yanimda/pages/profile_screen.dart';
 import 'package:akademi_yanimda/pages/register_screen.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,7 +18,8 @@ class _AuthScreenState extends State<AuthScreen> {
   navigateToHome() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) {
-        return HomePage();
+        return ProfileScreen();
+        // return HomePage();
       },
     ));
   }
@@ -36,7 +37,6 @@ class _AuthScreenState extends State<AuthScreen> {
             MainButton(
               isFilled: true,
               title: "Giriş Yap",
-              padding: EdgeInsets.symmetric(vertical: 20),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
               },
@@ -46,7 +46,6 @@ class _AuthScreenState extends State<AuthScreen> {
             SubHeaderText(title: "Öğrenmeye hemen başla", bottomPadding: 20),
             MainButton(
                 isFilled: false,
-                padding: EdgeInsets.symmetric(vertical: 20),
                 title: "Kayıt Ol",
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
@@ -118,10 +117,8 @@ class MainButton extends StatelessWidget {
   final bool isFilled;
   final void Function()? onTap;
   final String title;
-  final EdgeInsetsGeometry? padding;
-  const MainButton({
+  MainButton({
     super.key,
-    this.padding,
     required this.isFilled,
     required this.title,
     this.onTap,
@@ -133,7 +130,7 @@ class MainButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: padding,
+        padding: EdgeInsets.symmetric(vertical: 20),
         decoration: BoxDecoration(
           border: isFilled ? null : Border.all(color: Styles.buttonColor),
           color: isFilled ? Styles.buttonColor : Colors.transparent,
