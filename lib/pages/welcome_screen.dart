@@ -1,30 +1,28 @@
-import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_screen.dart';
-import 'package:akademi_yanimda/pages/welcome_screen.dart';
-import 'package:akademi_yanimda/pages/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatelessWidget{
-  const WelcomeScreen ({super.key}) {
-}
+class WelcomeScreen extends StatelessWidget {
+  WelcomeScreen({super.key}) {}
   @override
   Widget build(BuildContext context) {
-    
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(),
       backgroundColor: Colors.white,
-      body:Padding(
+      body: Padding(
         padding: PaddingItems.horizontalPadding,
-        child: Column(
-          children: [Image.asset('assets/images/logo.jpg.png')
-          ]),
+        child: Column(children: [
+          Image.asset('assets/images/logo.jpg.png'),
+          Spacer(),
+          ElevatedButton(
+              onPressed: () {},
+              child: const SizedBox(
+                height: ButtonHeights.buttonNormalHeight,
+                child: Center(
+                  child: Text('Hoşgeldiniz'),
+                ),
+              ))
+        ]),
       ),
-      const Spacer(),
-      
-      ElevatedButton(onPressed: () {},
-      child: const SizedBox (height:ButtonHeights.buttonNormalHeight, child : Center(child:Text('Hoşgeldiniz' ),),)
-      
-    )
-)
+    );
   }
 }
 
@@ -33,5 +31,5 @@ class PaddingItems {
 }
 
 class ButtonHeights {
-  static const buttonNormalHeight=50;
+  static const buttonNormalHeight = 50.0;
 }

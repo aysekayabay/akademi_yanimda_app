@@ -25,24 +25,22 @@ class _LessonsScreenState extends State<LessonsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          SizedBox(height: 80),
+          // Search(controller: _controller),
+          name(),
+          bar(),
+          Column(
             children: [
-              Search(controller: _controller),
-              name(),
-              bar(),
-              Column(
-                children: [
-                  LessonCard(name_count: 0,arkaplan_rengi: Colors.indigoAccent),
-                  LessonCard(name_count: 1,arkaplan_rengi: Colors.lightGreen),
-                  LessonCard(name_count: 0,arkaplan_rengi: Colors.tealAccent),
-                ],
-              )
+              LessonCard(name_count: 0, arkaplan_rengi: Colors.indigoAccent),
+              LessonCard(name_count: 1, arkaplan_rengi: Colors.lightGreen),
+              LessonCard(name_count: 0, arkaplan_rengi: Colors.tealAccent),
             ],
-          ),
-        ),
+          )
+        ],
       ),
     );
   }
@@ -53,12 +51,7 @@ class _LessonsScreenState extends State<LessonsScreen> {
       child: Container(
         width: 50,
         constraints: BoxConstraints(minWidth: 300, maxHeight: 5),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                stops: [0.2, 0.1],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Colors.greenAccent, Colors.grey.shade300])),
+        decoration: BoxDecoration(gradient: LinearGradient(stops: [0.2, 0.1], begin: Alignment.centerLeft, end: Alignment.centerRight, colors: [Colors.greenAccent, Colors.grey.shade300])),
       ),
     );
   }

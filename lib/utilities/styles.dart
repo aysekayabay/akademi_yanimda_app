@@ -8,5 +8,7 @@ class Styles {
   static const darkGrey = Color(0xff525F7F);
   static const classicTextStyle = TextStyle(color: darkGrey, fontFamily: 'Poppins', fontWeight: FontWeight.w500, fontSize: 18);
   static const buttonColor = Color(0xff686BFF);
+  static const lightPink = Color(0xffDED7F1);
+  static const darkPurp = Color(0xff5b37b7);
   static const hintStyle = TextStyle(fontFamily: 'Poppins', color: Color(0xffA1B2CF), fontSize: 16, fontWeight: FontWeight.w900);
 }

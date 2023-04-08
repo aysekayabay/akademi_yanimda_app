@@ -16,43 +16,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     User user = FirebaseAuth.instance.currentUser!;
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  child: Text(
-                    user.displayName!.substring(0, 1),
-                    style: Styles.buttonTextStyle,
-                  ),
-                  backgroundColor: Styles.buttonColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20) + EdgeInsets.only(top: 50),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              CircleAvatar(
+                radius: 50,
+                child: Text(
+                  user.displayName!.substring(0, 1),
+                  style: Styles.buttonTextStyle,
                 ),
-                SizedBox(height: 50),
-                ProfileContainer(title: "Ad Soyad", value: user.displayName!),
-                ProfileContainer(title: "Şifre", value: "********"),
-                ProfileContainer(title: "E-posta", value: user.email!),
-              ],
-            ),
-            MainButton(
-                onTap: () async {
-                  await signOutWithGoogle();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) {
-                      return AuthScreen();
-                    },
-                  ));
-                },
-                isFilled: true,
-                title: "Çıkış Yap"),
-          ],
-        ),
+                backgroundColor: Styles.buttonColor,
+              ),
+              SizedBox(height: 50),
+              ProfileContainer(title: "Ad Soyad", value: user.displayName!),
+              ProfileContainer(title: "Şifre", value: "********"),
+              ProfileContainer(title: "E-posta", value: user.email!),
+            ],
+          ),
+          MainButton(
+              onTap: () async {
+                await signOutWithGoogle();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) {
+                    return AuthScreen();
+                  },
+                ));
+              },
+              isFilled: true,
+              title: "Çıkış Yap"),
+        ],
       ),
     );
   }

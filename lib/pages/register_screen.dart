@@ -138,7 +138,6 @@ class CustomAuthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var hintStyle = TextStyle(color: Color(0xffA1B2CF), fontFamily: 'Poppins', fontWeight: FontWeight.w900, fontSize: 16);
     return TextFormField(
         validator: validator,
         style: Styles.classicTextStyle,
