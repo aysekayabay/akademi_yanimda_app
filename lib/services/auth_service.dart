@@ -1,4 +1,5 @@
 import 'package:akademi_yanimda/firebase/firestore_manager.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +21,14 @@ class AuthService {
     userData = null;
   }
 
-  Future<int> register(BuildContext context, String email, String password) async {
+  Future<int> register({required BuildContext context, required String email, required String password, required String fullName, required String nickName}) async {
     try {
       UserCredential user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
       if (user.user != null) {
         await FirestoreManager().firestoreSendDataMap(
-          collectionID: 'user',
+          collectionID: 'users',
           docID: user.user!.uid,
-          data: {'email': email, 'userID': user.user!.uid, 'created': DateTime.now(), 'point': 0},
+          data: {'email': email, 'userID': user.user!.uid, 'created': FieldValue.serverTimestamp(), 'point': 0, 'fullName': fullName, 'nickName': nickName},
         );
         uid = user.user!.uid;
         // userData = await FirestoreManager().firestoreGetDocument(collectionID: "user", documentID: user.user!.uid);
@@ -46,7 +47,7 @@ class AuthService {
       UserCredential user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       if (user != null) {
         uid = user.user!.uid;
-        userData = await FirestoreManager().firestoreGetDocument(collectionID: "user", documentID: user.user!.uid);
+        userData = await FirestoreManager().firestoreGetDocument(collectionID: "users", documentID: user.user!.uid);
         return 1;
       } else {
         return 0;
