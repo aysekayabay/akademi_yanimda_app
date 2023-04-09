@@ -27,23 +27,27 @@ class _LessonsScreenState extends State<LessonsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var user = FirebaseAuth.instance.currentUser;
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          SizedBox(height: 80),
-          //  Search(controller: _controller),
-          name(title: user!.displayName!),
-          bar(),
-          Column(
-            children: [
-              LessonCard(name_count: 0, arkaplan_rengi: Styles.buttonColor),
-              LessonCard(name_count: 1, arkaplan_rengi: Styles.cardBlue),
-              LessonCard(name_count: 0, arkaplan_rengi: Styles.cardPink),
-            ],
-          )
-        ],
+    //var user = FirebaseAuth.instance.currentUser;
+    return Scaffold(
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(height: 80),
+            //  Search(controller: _controller),
+            //name(title: user!.displayName!),
+            bar(),
+            Column(
+              children: [
+                LessonCard(name_count: 0, arkaplan_rengi: Styles.buttonColor),
+                LessonCard(name_count: 1, arkaplan_rengi: Styles.cardBlue),
+                LessonCard(name_count: 2, arkaplan_rengi: Styles.cardPink),
+                LessonCard(name_count: 3, arkaplan_rengi: Styles.rankOrange),
+                LessonCard(name_count: 4, arkaplan_rengi: Styles.rankYellow)
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

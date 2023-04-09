@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lesson_title.dart';
 import 'package:akademi_yanimda/services/card_info.dart';
+import 'package:akademi_yanimda/services/youtube_service.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -55,12 +57,19 @@ class LessonCard extends StatelessWidget {
                           style: CardInfo.AD_STYLE.copyWith(color: Colors.white),
                         ),
                         SizedBox(height: 10),
-                        Container(
-                          decoration: ShapeDecoration(shape: StadiumBorder(), color: Colors.white),
-                          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                          child: Text(
-                            "Başla",
-                            style: TextStyle(color: Styles.darkPurp),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                             return LessonTitle(konu: YoutubeService.Konular[name_count],);
+                            },));
+                          },
+                          child: Container(
+                            decoration: ShapeDecoration(shape: StadiumBorder(), color: Colors.white),
+                            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                            child: Text(
+                              "Başla",
+                              style: TextStyle(color: Styles.darkPurp),
+                            ),
                           ),
                         ),
                       ],

@@ -1,18 +1,19 @@
+import 'package:akademi_yanimda/models/lesson_model.dart';
 import 'package:akademi_yanimda/services/youtube_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoContent extends StatefulWidget {
-  const VideoContent({super.key});
+  Baslik baslik;
+  VideoContent({super.key, required this.baslik});
 
   @override
   State<VideoContent> createState() => _VideoContentState();
 }
 
 class _VideoContentState extends State<VideoContent> {
-  final videoURL =
-      "https://www.youtube.com/watch?v=RKwJwCaaFec&ab_channel=OyunveUygulamaAkademisi";
+  late final videoURL = widget.baslik.video_link;
   late YoutubePlayerController _controller;
   @override
   void initState() {
@@ -37,23 +38,27 @@ class _VideoContentState extends State<VideoContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.close)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.close)),
       ),
       body: Center(
         child: Column(
           children: [
             SizedBox(height: 30),
             Text(
-              "Başlık buraya gelecek",
+              widget.baslik.konu,
               style: GoogleFonts.inter(
-                fontSize: 18,
-                color: Colors.black87,
-                fontWeight: FontWeight.w600,
+                fontSize: 24,
+                color: Colors.black54,
+                fontWeight: FontWeight.w700,
               ),
             ),
             SizedBox(height: 30),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(16.0),
               child: Container(
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
@@ -66,10 +71,10 @@ class _VideoContentState extends State<VideoContent> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             Container(
-              width: 280,
-              height: 45,
+              width: 320,
+              height: 60,
               child: ElevatedButton(
                 onPressed: () {},
                 child: Text(
@@ -77,7 +82,7 @@ class _VideoContentState extends State<VideoContent> {
                   style: GoogleFonts.inter(
                     fontSize: 16,
                     color: Colors.white,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -90,8 +95,8 @@ class _VideoContentState extends State<VideoContent> {
             ),
             SizedBox(height: 20),
             Container(
-              width: 280,
-              height: 45,
+              width: 320,
+              height: 60,
               child: ElevatedButton(
                 onPressed: () {},
                 child: Text(
@@ -99,7 +104,7 @@ class _VideoContentState extends State<VideoContent> {
                   style: GoogleFonts.inter(
                     fontSize: 16,
                     color: Colors.white,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -110,6 +115,15 @@ class _VideoContentState extends State<VideoContent> {
                     backgroundColor: Color.fromARGB(255, 111, 77, 190)),
               ),
             ),
+            SizedBox(width: 10),
+            Center(
+                child: Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/Logo_png.png"))),
+            ))
           ],
         ),
       ),

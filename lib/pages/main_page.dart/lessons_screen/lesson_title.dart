@@ -1,5 +1,7 @@
 import 'package:akademi_yanimda/models/lesson_model.dart';
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/video_content_screen.dart';
 import 'package:akademi_yanimda/services/card_info.dart';
+import 'package:akademi_yanimda/services/youtube_service.dart';
 import 'package:flutter/material.dart';
 
 class LessonTitle extends StatelessWidget {
@@ -72,7 +74,13 @@ class titleCard extends StatelessWidget {
         padding: EdgeInsets.all(12),
         child: ListTile(
           //leading: CircleAvatar(backgroundImage: AssetImage("assets/images${CardInfo.BASLIK[0]}.jpg"),),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  VideoContent(baslik: baslik,),
+            ));
+          },
+         
           title: Text(baslik.konu.length.toString()),
           subtitle: Text(
             baslik.konu,
