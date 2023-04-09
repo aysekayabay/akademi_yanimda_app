@@ -10,7 +10,7 @@ class VideoContent extends StatefulWidget {
 }
 
 class _VideoContentState extends State<VideoContent> {
-  final videoURL = YoutubeService.flutter[1];
+  final videoURL = YoutubeService.Konular[0].Basliklar[1].toString();
   late YoutubePlayerController _controller;
   @override
   void initState() {
