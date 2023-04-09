@@ -18,9 +18,8 @@ class _RankingScreenState extends State<RankingScreen> {
         body: StreamBuilder(
       stream: FirebaseFirestore.instance.collection('users').orderBy('point').snapshots(),
       builder: (context, snapshot) {
-        List<Row> clientList = [];
         if (snapshot.hasData) {
-          final clientList = snapshot.data!.docs.reversed.toList();
+          final rankList = snapshot.data!.docs.reversed.toList();
           var contLinearLightBlue = Color(0xff686BFF);
           var contLinearDarkBlue = Color(0xff00061D);
           return Container(
@@ -38,7 +37,7 @@ class _RankingScreenState extends State<RankingScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Header(),
-                // rankHeader(clientList),
+                rankList.length >= 3 ? rankHeader(rankList) : SizedBox(),
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.only(top: 20),
@@ -51,16 +50,11 @@ class _RankingScreenState extends State<RankingScreen> {
                       children: [
                         rankingItem(fullName: "Ad Soyad", no: "No", puan: "Puan", header: true),
                         SizedBox(height: 10),
-                        // Column(
-                        //   children: List.generate(clientList.length - 3, (index) {
-                        //     return Row(
-                        //       children: [
-                        //         Text(clientList[index + 3]['name']),
-                        //         Text(clientList[index + 3]['point'].toString()),
-                        //       ],
-                        //     );
-                        //   }),
-                        // )
+                        Column(
+                          children: List.generate(rankList.length - 3, (index) {
+                            return rankingItem(header: false, no: (index + 4).toString(), puan: rankList[index + 3]['point'].toString(), fullName: rankList[index + 3]['nickName'] ?? '');
+                          }),
+                        )
                       ],
                     ),
                   ),
@@ -77,7 +71,7 @@ class _RankingScreenState extends State<RankingScreen> {
     ));
   }
 
-  Widget rankHeader(List<QueryDocumentSnapshot<Map<String, dynamic>>> clientList) {
+  Widget rankHeader(List<QueryDocumentSnapshot<Map<String, dynamic>>> rankList) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -89,8 +83,8 @@ class _RankingScreenState extends State<RankingScreen> {
               decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/polygon2.png"))),
               child: Text("2nd", style: Styles.rankingNum),
             ),
-            degreeContainer(title: clientList[2]['name'], color: Styles.rankGrey),
-            Text("2810", style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800))
+            degreeContainer(title: rankList[1]['nickName'], color: Styles.rankGrey),
+            Text(rankList[1]['point'].toString(), style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800))
           ],
         ),
         Column(
@@ -100,8 +94,8 @@ class _RankingScreenState extends State<RankingScreen> {
               decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/polygon1.png"))),
               child: Text("1st", style: Styles.rankingNum),
             ),
-            degreeContainer(title: clientList[1]['name'], color: Styles.rankYellow),
-            Text("2810", style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800))
+            degreeContainer(title: rankList[0]['nickName'], color: Styles.rankYellow),
+            Text(rankList[0]['point'].toString(), style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800))
           ],
         ),
         Column(
@@ -112,8 +106,8 @@ class _RankingScreenState extends State<RankingScreen> {
               decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/polygon3.png"))),
               child: Text("3rd", style: Styles.rankingNum),
             ),
-            degreeContainer(title: clientList[2]['name'], color: Styles.rankOrange),
-            Text("2810", style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800)),
+            degreeContainer(title: rankList[2]['nickName'], color: Styles.rankOrange),
+            Text(rankList[2]['point'].toString(), style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800)),
           ],
         ),
       ],
@@ -197,7 +191,7 @@ class degreeContainer extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: ShapeDecoration(shape: StadiumBorder(), color: color),
         child: Text(
-          title,
+          "@" + title,
           style: Styles.rankingTextStyle,
         ));
   }

@@ -1,6 +1,5 @@
 import 'package:akademi_yanimda/pages/login_screen.dart';
 import 'package:akademi_yanimda/pages/register_screen.dart';
-import 'package:akademi_yanimda/pages/setting_nickname_screen.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,14 +19,6 @@ class _AuthScreenState extends State<AuthScreen> {
     Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) {
         return HomeBar();
-      },
-    ));
-  }
-
-  navigateToGoogleSigned() {
-    Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) {
-        return SettingNicknameScreen();
       },
     ));
   }
@@ -72,10 +63,10 @@ class _AuthScreenState extends State<AuthScreen> {
           await signInWithGoogle();
           User user = FirebaseAuth.instance.currentUser!;
           await FirebaseFirestore.instance.collection('users').doc(user.uid).set(
-            {'email': user.email, 'userID': user.uid, 'created': FieldValue.serverTimestamp(), 'point': 0, 'fullName': user.displayName, 'nickName': null},
+            {'email': user.email, 'userID': user.uid, 'created': FieldValue.serverTimestamp(), 'point': 0, 'fullName': user.displayName, 'nickName': user.displayName, 'firstQuestion': 0},
             SetOptions(merge: true),
           );
-          navigateToGoogleSigned();
+          navigateToHome();
         },
         child: Image(
           image: AssetImage("assets/images/google.png"),

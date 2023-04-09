@@ -22,24 +22,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       appBar: AppBar(),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: PaddingItems.horizontalPadding,
+        padding: const EdgeInsets.all(20.0),
         child: Column(children: [
-          Image.asset('assets/images/logo.png'),
-          Spacer(),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: MainButton(
-              isFilled: true,
-              title: "Hoşgeldiniz",
-              onTap: () async {
-                await _storeWelcomeInfo();
-                Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context) {
-                    return AuthScreen();
-                  },
-                ));
-              },
-            ),
+          Image.asset('assets/images/logo_t.png', width: 200),
+          SizedBox(height: 50),
+          Image.asset('assets/images/welcome.png', width: 300),
+          SizedBox(height: 50),
+          MainButton(
+            isFilled: true,
+            title: "Hoşgeldiniz",
+            onTap: () async {
+              await _storeWelcomeInfo();
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                builder: (context) {
+                  return AuthScreen();
+                },
+              ));
+            },
           ),
         ]),
       ),

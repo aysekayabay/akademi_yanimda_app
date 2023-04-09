@@ -45,6 +45,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   smooth_page_indicator: ^1.0.1
   shared_preferences: ^2.1.0
+  flutter_riverpod: ^2.3.4
 
 dev_dependencies:
   flutter_test:

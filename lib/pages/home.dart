@@ -1,10 +1,10 @@
+import 'package:akademi_yanimda/pages/forum_screen.dart';
+import 'package:akademi_yanimda/pages/main_page.dart/collections_screen/collection_screen.dart';
 import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_screen.dart';
 import 'package:akademi_yanimda/pages/profile_screen.dart';
-import 'package:akademi_yanimda/pages/ranking_screen.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
 
 class HomeBar extends StatefulWidget {
   const HomeBar({super.key});
@@ -17,8 +17,8 @@ class HomeBarState extends State<HomeBar> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     LessonsScreen(),
-    RankingScreen(),
-    Text("Home2"),
+    CollectionScreen(),
+    ForumScreen(),
     ProfileScreen(),
   ];
   @override
@@ -44,8 +44,8 @@ class HomeBarState extends State<HomeBar> {
               text: "Dersler",
             ),
             GButton(
-              icon: Icons.emoji_events_outlined,
-              text: "Sıralama",
+              icon: Icons.local_attraction_outlined,
+              text: "Koleksiyon",
             ),
             GButton(
               icon: Icons.forum_outlined,

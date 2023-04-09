@@ -24,11 +24,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
       body: Column(
         children: [
           SizedBox(height: 40),
-          Text("Koleksiyonum",
-              style: GoogleFonts.inter(
-                  color: Colors.grey.shade800,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w900)),
+          Text("Koleksiyonum", style: GoogleFonts.inter(color: Colors.grey.shade800, fontSize: 22, fontWeight: FontWeight.w900)),
           SizedBox(
             height: 40,
           ),
@@ -38,20 +34,9 @@ class _CollectionScreenState extends State<CollectionScreen> {
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemCount: 3,
-              cacheExtent: 10,
               itemBuilder: (context, index) {
                 return Row(
                   children: [
-                    CollectionCard(
-                      title: "Hazırsan Başlıyoruz",
-                      subtitle: "ilk soru cevabın",
-                      resim: "Card1",
-                    ),
-                    CollectionCard(
-                      title: "Hazırsan Başlıyoruz",
-                      subtitle: "ilk soru cevabın",
-                      resim: "Card2",
-                    ),
                     CollectionCard(
                       title: "Hazırsan Başlıyoruz",
                       subtitle: "ilk soru cevabın",
@@ -63,19 +48,20 @@ class _CollectionScreenState extends State<CollectionScreen> {
             ),
           ),
           SizedBox(height: 45),
-          SingleChildScrollView(scrollDirection: Axis.horizontal,
-            child: Row(children: [  konular(0),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                konular(0),
                 konular(1),
                 konular(2),
                 konular(3),
-                konular(4),],),
+                konular(4),
+              ],
+            ),
           ),
           SizedBox(height: 20),
-          SmoothPageIndicator(
-              controller: _controller,
-              count: 3,
-              effect: ExpandingDotsEffect(
-                  activeDotColor: Colors.tealAccent.shade400, dotHeight: 10, dotWidth: 10)),
+          SmoothPageIndicator(controller: _controller, count: 3, effect: ExpandingDotsEffect(activeDotColor: Colors.tealAccent.shade400, dotHeight: 10, dotWidth: 10)),
         ],
       ),
     );

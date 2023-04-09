@@ -16,12 +16,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   UserModel? currentUser;
+  bool isLoading = true;
   _fetchCurrentUser() async {
     final firebaseUser = await FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       await FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid).get().then((value) {
         setState(() {
-          currentUser = UserModel(value['fullName'], value['nickName'], value['email'], value['point'], value['userID']);
+          currentUser = UserModel(value['fullName'], value['nickName'], value['email'], value['point'], value['userID'], value['firstQuestion']);
+          isLoading = false;
         });
       });
     }
@@ -36,43 +38,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     User user = FirebaseAuth.instance.currentUser!;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20) + EdgeInsets.only(top: 50),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              CircleAvatar(
-                radius: 50,
-                child: Text(
-                  user.displayName!.substring(0, 1),
-                  style: Styles.buttonTextStyle,
+    return isLoading
+        ? Center(child: CircularProgressIndicator())
+        : Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20) + EdgeInsets.only(top: 50),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      child: Text(
+                        user.displayName!.substring(0, 1),
+                        style: Styles.buttonTextStyle,
+                      ),
+                      backgroundColor: Styles.buttonColor,
+                    ),
+                    SizedBox(height: 50),
+                    ProfileContainer(title: "Ad Soyad", value: user.displayName!),
+                    ProfileContainer(title: "Kullanıcı Adı", value: currentUser?.nickName ?? ''),
+                    ProfileContainer(title: "Şifre", value: "********"),
+                    ProfileContainer(title: "E-posta", value: user.email!),
+                  ],
                 ),
-                backgroundColor: Styles.buttonColor,
-              ),
-              SizedBox(height: 50),
-              ProfileContainer(title: "Ad Soyad", value: user.displayName!),
-              ProfileContainer(title: "Kullanıcı Adı", value: currentUser?.nickName ?? ''),
-              ProfileContainer(title: "Şifre", value: "********"),
-              ProfileContainer(title: "E-posta", value: user.email!),
-            ],
-          ),
-          MainButton(
-              onTap: () async {
-                await signOutWithGoogle();
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) {
-                    return AuthScreen();
-                  },
-                ));
-              },
-              isFilled: true,
-              title: "Çıkış Yap"),
-        ],
-      ),
-    );
+                MainButton(
+                    onTap: () async {
+                      await signOutWithGoogle();
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) {
+                          return AuthScreen();
+                        },
+                      ));
+                    },
+                    isFilled: true,
+                    title: "Çıkış Yap"),
+              ],
+            ),
+          );
   }
 }
 
