@@ -1,4 +1,6 @@
-import 'package:akademi_yanimda/pages/home_screen.dart';
+import 'package:akademi_yanimda/pages/auth_screen.dart';
+import 'package:akademi_yanimda/pages/home.dart';
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_screen.dart';
 import 'package:akademi_yanimda/services/auth_service.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -86,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onSaved: (newValue) {
                         registerForm['password'];
                       }),
+                  SizedBox(height: 50),
                   isSaving
                       ? Center(child: CircularProgressIndicator())
                       : InkWell(
@@ -108,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               });
                               Navigator.of(context).pushReplacement(MaterialPageRoute(
                                 builder: (context) {
-                                  return HomePage();
+                                  return HomeBar();
                                 },
                               ));
                             }
@@ -116,17 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               isSaving = false;
                             });
                           },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            decoration: Styles.buttonDecoration,
-                            child: Center(
-                              child: Text(
-                                "Kayıt Ol",
-                                style: Styles.buttonTextStyle,
-                              ),
-                            ),
-                          ))
+                          child: MainButton(isFilled: true, title: "Kayıt Ol"))
                 ]),
               ),
             ),
@@ -146,16 +139,14 @@ class CustomAuthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = TextStyle(fontFamily: 'Poppins', color: Color(0xff525F7F), fontSize: 18, fontWeight: FontWeight.w500);
-    var hintStyle = TextStyle(color: Color(0xffA1B2CF), fontFamily: 'Poppins', fontWeight: FontWeight.w900, fontSize: 16);
     return TextFormField(
         validator: validator,
-        style: textStyle,
+        style: Styles.classicTextStyle,
         controller: controller,
         decoration: InputDecoration(
             label: Text(
           label,
-          style: hintStyle,
+          style: Styles.hintStyle,
         )),
         onSaved: onSaved);
   }
