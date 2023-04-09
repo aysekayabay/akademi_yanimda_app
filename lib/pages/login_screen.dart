@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController mailController = TextEditingController();
   navigateToHome() {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) {
         return HomeBar();
       },

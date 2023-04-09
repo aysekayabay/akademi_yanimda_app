@@ -43,7 +43,11 @@ dependencies:
   cloud_firestore: ^4.5.0
   google_fonts: ^4.0.3
   google_nav_bar: ^5.0.6
+<<<<<<< HEAD
   smooth_page_indicator: ^1.0.1
+=======
+  shared_preferences: ^2.1.0
+>>>>>>> 6a19560129b935fede3666d3ace106f032d4b4c1
 
 dev_dependencies:
   flutter_test:

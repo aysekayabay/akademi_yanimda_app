@@ -27,7 +27,7 @@ class AuthService {
         await FirestoreManager().firestoreSendDataMap(
           collectionID: 'user',
           docID: user.user!.uid,
-          data: {'email': email, 'userID': user.user!.uid, 'created': DateTime.now()},
+          data: {'email': email, 'userID': user.user!.uid, 'created': DateTime.now(), 'point': 0},
         );
         uid = user.user!.uid;
         // userData = await FirestoreManager().firestoreGetDocument(collectionID: "user", documentID: user.user!.uid);

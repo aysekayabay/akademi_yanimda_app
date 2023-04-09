@@ -1,12 +1,11 @@
-import 'package:akademi_yanimda/pages/home.dart';
 import 'package:akademi_yanimda/pages/login_screen.dart';
-import 'package:akademi_yanimda/pages/profile_screen.dart';
 import 'package:akademi_yanimda/pages/register_screen.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
+import 'home.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -17,7 +16,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   navigateToHome() {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) {
         return HomeBar();
       },
