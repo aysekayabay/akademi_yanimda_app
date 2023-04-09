@@ -15,4 +15,10 @@ class CardInfo {
       color: Colors.white, fontWeight: FontWeight.w600, fontSize: 24);
   static ButtonStyle CARD_BUTTON = ElevatedButton.styleFrom(
       backgroundColor: Colors.white, side: BorderSide(width: 5));
+  static TextStyle KONU_BASLIK = GoogleFonts.rubik(
+      color: Colors.black87, fontSize: 24, fontWeight: FontWeight.w600);
+  static TextStyle KONU_BASLIK1 = GoogleFonts.rubik(
+      color: Colors.indigo, fontSize: 20, fontWeight: FontWeight.w500);
+  static TextStyle KONU_ADI = GoogleFonts.rubik(
+      color: Colors.indigo, fontSize: 18, fontWeight: FontWeight.w400);
 }

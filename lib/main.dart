@@ -1,6 +1,7 @@
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lesson_title.dart';
 import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_screen.dart';
 import 'package:akademi_yanimda/pages/splash_screen.dart';
-import 'package:akademi_yanimda/pages/video_content_screen.dart';
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/video_content_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

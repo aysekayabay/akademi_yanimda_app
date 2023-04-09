@@ -1,11 +1,13 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lesson_title.dart';
 import 'package:akademi_yanimda/services/card_info.dart';
+import 'package:akademi_yanimda/services/youtube_service.dart';
 import 'package:flutter/material.dart';
 
 class LessonCard extends StatelessWidget {
   LessonCard(
-      {super.key, required this.name_count, required this.arkaplan_rengi});
+      {super.key, required this.name_count, required this.arkaplan_rengi,});
   late int name_count;
   late Color arkaplan_rengi;
   @override
@@ -58,7 +60,7 @@ class LessonCard extends StatelessWidget {
                       backgroundColor: Colors.white,
                       shape: StadiumBorder(),
                       fixedSize: Size(60, 20)),
-                  onPressed: () {}),
+                  onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => LessonTitle(konu:YoutubeService.Konular[name_count] ),));}),
               top: 95,
               right: 140,
               left: 15,
