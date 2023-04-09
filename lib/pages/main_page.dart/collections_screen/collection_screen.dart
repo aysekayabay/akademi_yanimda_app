@@ -34,48 +34,65 @@ class _CollectionScreenState extends State<CollectionScreen> {
           ),
           SizedBox(
             height: 250,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
-              itemCount: 3,
-              cacheExtent: 10,
-              itemBuilder: (context, index) {
-                return Row(
-                  children: [
-                    CollectionCard(
-                      title: "Hazırsan Başlıyoruz",
-                      subtitle: "ilk soru cevabın",
-                      resim: "Card1",
-                    ),
-                    CollectionCard(
-                      title: "Hazırsan Başlıyoruz",
-                      subtitle: "ilk soru cevabın",
-                      resim: "Card2",
-                    ),
-                    CollectionCard(
-                      title: "Hazırsan Başlıyoruz",
-                      subtitle: "ilk soru cevabın",
-                      resim: "Card1",
-                    ),
-                  ],
-                );
-              },
-            ),
+            child: PageView(controller: _controller, scrollDirection: Axis.horizontal,children: [
+              CollectionCard(
+                title: "Hazırsan Başlıyoruz",
+                subtitle: "ilk soru cevabın",
+                resim: "card1",
+                topPositioned: 160,
+                leftPositioned: 115,
+              ),
+              CollectionCard(
+                title: "Flatter Hastası",
+                subtitle: "20 Soru Sordun",
+                resim: "card2",
+                topPositioned: 160,
+                leftPositioned: 120,
+              ),
+              CollectionCard(
+                title: "Başarı Koleksiyonu",
+                subtitle: "Bu Haftanın Birincisi",
+                resim: "card3",
+                topPositioned: 160,
+                leftPositioned: 115,
+              ),
+              CollectionCard(
+                title: "  Topluluğu Katkı",
+                subtitle: "5 Soru Cevapladım",
+                resim: "card4",
+                topPositioned: 160,
+                leftPositioned: 120,
+              ),
+              CollectionCard(
+                title: "Kurnaz Bursiyer",
+                subtitle: "Kolay Yolu Buldun",
+                resim: "card5",
+                topPositioned: 160,
+                leftPositioned: 120,
+              ),
+            ]),
           ),
           SizedBox(height: 45),
-          SingleChildScrollView(scrollDirection: Axis.horizontal,
-            child: Row(children: [  konular(0),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                konular(0),
                 konular(1),
                 konular(2),
                 konular(3),
-                konular(4),],),
+                konular(4),
+              ],
+            ),
           ),
           SizedBox(height: 20),
           SmoothPageIndicator(
               controller: _controller,
-              count: 3,
+              count: 5,
               effect: ExpandingDotsEffect(
-                  activeDotColor: Colors.tealAccent.shade400, dotHeight: 10, dotWidth: 10)),
+                  activeDotColor: Colors.tealAccent.shade400,
+                  dotHeight: 10,
+                  dotWidth: 10)),
         ],
       ),
     );

@@ -115,14 +115,14 @@ class _VideoContentState extends State<VideoContent> {
                     backgroundColor: Color.fromARGB(255, 111, 77, 190)),
               ),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 15),
             Center(
                 child: Container(
-              width: 150,
-              height: 150,
+              width: 160,
+              height: 160,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/Logo_png.png"))),
+                      image: AssetImage("assets/images/akademi_yanimda.png"))),
             ))
           ],
         ),

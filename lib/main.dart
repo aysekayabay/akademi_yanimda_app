@@ -1,3 +1,4 @@
+import 'package:akademi_yanimda/pages/main_page.dart/collections_screen/collection_screen.dart';
 import 'package:akademi_yanimda/pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
