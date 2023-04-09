@@ -1,4 +1,5 @@
 import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_card.dart';
+import 'package:akademi_yanimda/pages/ranking_screen.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,15 +28,15 @@ class _LessonsScreenState extends State<LessonsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //var user = FirebaseAuth.instance.currentUser;
+    var user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(height: 80),
-            //  Search(controller: _controller),
-            //name(title: user!.displayName!),
+            // Search(controller: _controller),
+            name(title: user!.displayName!),
             bar(),
             Column(
               children: [
@@ -54,7 +55,7 @@ class _LessonsScreenState extends State<LessonsScreen> {
 
   Padding bar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
       child: Container(
         width: MediaQuery.of(context).size.width,
         constraints: BoxConstraints(minWidth: 300, maxHeight: 5),
@@ -134,7 +135,11 @@ class name extends StatelessWidget {
             ],
           ),
           InkWell(
-            // onTap: () => Navigator.of(context).push(route),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return RankingScreen();
+              },
+            )),
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(color: Styles.baseOrange, shape: BoxShape.circle),

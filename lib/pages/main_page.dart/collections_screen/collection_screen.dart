@@ -24,11 +24,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
       body: Column(
         children: [
           SizedBox(height: 40),
-          Text("Koleksiyonum",
-              style: GoogleFonts.inter(
-                  color: Colors.grey.shade800,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w900)),
+          Text("Koleksiyonum", style: GoogleFonts.inter(color: Colors.grey.shade800, fontSize: 22, fontWeight: FontWeight.w900)),
           SizedBox(
             height: 40,
           ),
