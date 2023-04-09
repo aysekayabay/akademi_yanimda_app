@@ -102,44 +102,47 @@ class name extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: GoogleFonts.rubik(
-                color: Styles.darkGrey,
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.rubik(
+                  color: Styles.darkGrey,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            SizedBox(height: 5),
-            Text(
-              "Kazanılabilir Koleksiyonlar",
-              style: GoogleFonts.rubik(
-                color: Styles.lightGrey,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+              SizedBox(height: 5),
+              Text(
+                "Kazanılabilir Koleksiyonlar",
+                style: GoogleFonts.rubik(
+                  color: Styles.lightGrey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-          ],
-        ),
-        InkWell(
-          // onTap: () => Navigator.of(context).push(route),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(color: Styles.baseOrange, shape: BoxShape.circle),
-            child: Image(
-              image: AssetImage("assets/images/cup.png"),
-              height: 40,
-              width: 40,
-            ),
+            ],
           ),
-        )
-      ],
+          InkWell(
+            // onTap: () => Navigator.of(context).push(route),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(color: Styles.baseOrange, shape: BoxShape.circle),
+              child: Image(
+                image: AssetImage("assets/images/cup.png"),
+                height: 40,
+                width: 40,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

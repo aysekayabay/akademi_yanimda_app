@@ -17,7 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     User user = FirebaseAuth.instance.currentUser!;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20) + EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20) + EdgeInsets.only(top: 50),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
