@@ -42,9 +42,9 @@ class _QuestionPageState extends State<QuestionPage> {
         backgroundColor: Color(0xffF6F8FD),
         appBar: AppBar(),
         body: isLoading
-            ? CircularProgressIndicator()
+            ? Center(child: CircularProgressIndicator())
             : StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('forum').doc('${widget.forum.docID}').collection('answers').snapshots(),
+                stream: FirebaseFirestore.instance.collection('forum').doc('${widget.forum.docID}').collection('answers').orderBy('time').snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final answerList = snapshot.data!.docs.reversed.toList();
@@ -52,7 +52,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -90,7 +90,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                           .collection('forum')
                                           .doc('${widget.forum.docID}')
                                           .collection('answers')
-                                          .add({'text': controller.text, 'sender': user.displayName, 'time': DateTime.now()});
+                                          .add({'text': controller.text, 'sender': currentUser!.nickName, 'time': DateTime.now()});
                                       controller.clear();
 
                                       int userPoint = currentUser!.point;
@@ -106,6 +106,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                         )),
                                   ),
                                 ),
+                                SizedBox(height: 10),
                                 Divider()
                               ],
                             ),

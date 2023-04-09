@@ -51,7 +51,7 @@ class _RankingScreenState extends State<RankingScreen> {
                         rankingItem(fullName: "Ad Soyad", no: "No", puan: "Puan", header: true),
                         SizedBox(height: 10),
                         Column(
-                          children: List.generate(rankList.length - 3, (index) {
+                          children: List.generate(rankList.length >= 3 ? (rankList.length - 3) : 0, (index) {
                             return rankingItem(header: false, no: (index + 4).toString(), puan: rankList[index + 3]['point'].toString(), fullName: rankList[index + 3]['nickName'] ?? '');
                           }),
                         )
@@ -65,7 +65,7 @@ class _RankingScreenState extends State<RankingScreen> {
         } else if (snapshot.hasError) {
           return Center(child: Text(snapshot.error.toString()));
         } else {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
       },
     ));

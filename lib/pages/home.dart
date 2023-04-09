@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomeBar extends StatefulWidget {
-  const HomeBar({super.key});
+  final int selectedIndex;
+  const HomeBar({super.key, this.selectedIndex = 0});
 
   @override
   State<HomeBar> createState() => HomeBarState();

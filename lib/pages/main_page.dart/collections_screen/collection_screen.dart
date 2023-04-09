@@ -16,21 +16,16 @@ class _CollectionScreenState extends State<CollectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          leading: IconButton(
-        icon: Icon(Icons.close),
-        onPressed: () => Navigator.of(context).pop(),
-      )),
       body: Column(
         children: [
-          SizedBox(height: 40),
-          Text("Koleksiyonum", style: GoogleFonts.inter(color: Colors.grey.shade800, fontSize: 22, fontWeight: FontWeight.w900)),
+          SizedBox(height: 80),
+          Text("Koleksiyonum Yakında", style: GoogleFonts.inter(color: Colors.grey.shade800, fontSize: 22, fontWeight: FontWeight.w900)),
           SizedBox(
             height: 40,
           ),
           SizedBox(
             height: 250,
-            child: PageView(controller: _controller, scrollDirection: Axis.horizontal,children: [
+            child: PageView(controller: _controller, scrollDirection: Axis.horizontal, children: [
               CollectionCard(
                 title: "Hazırsan Başlıyoruz",
                 subtitle: "ilk soru cevabın",
@@ -82,13 +77,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
             ),
           ),
           SizedBox(height: 20),
-          SmoothPageIndicator(
-              controller: _controller,
-              count: 5,
-              effect: ExpandingDotsEffect(
-                  activeDotColor: Colors.tealAccent.shade400,
-                  dotHeight: 10,
-                  dotWidth: 10)),
+          SmoothPageIndicator(controller: _controller, count: 5, effect: ExpandingDotsEffect(activeDotColor: Colors.tealAccent.shade400, dotHeight: 10, dotWidth: 10)),
         ],
       ),
     );

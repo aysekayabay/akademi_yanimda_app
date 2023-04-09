@@ -31,6 +31,7 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 60),
             HeaderText(title: "Hesabınız var mı?", bottomPadding: 10),
             SubHeaderText(title: "Gelişmeye devam et", bottomPadding: 20),
             MainButton(

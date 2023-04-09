@@ -1,6 +1,6 @@
 import 'package:akademi_yanimda/pages/auth_screen.dart';
+import 'package:akademi_yanimda/pages/onboard/onboard_view.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({super.key}) {}
@@ -10,12 +10,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  _storeWelcomeInfo() async {
-    int isViewed = 1;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('welcome', isViewed);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +26,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             isFilled: true,
             title: "Hoşgeldiniz",
             onTap: () async {
-              await _storeWelcomeInfo();
               Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) {
-                  return AuthScreen();
+                  return OnboardView();
                 },
               ));
             },

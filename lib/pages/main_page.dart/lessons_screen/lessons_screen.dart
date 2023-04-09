@@ -1,4 +1,5 @@
 import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_card.dart';
+import 'package:akademi_yanimda/pages/onboard/onboard_view.dart';
 import 'package:akademi_yanimda/pages/ranking_screen.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';

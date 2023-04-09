@@ -4,6 +4,7 @@ class Styles {
   static const buttonDecoration = BoxDecoration(color: buttonColor, borderRadius: BorderRadius.all(Radius.circular(10)));
   static const buttonTextStyle = TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500);
   static const rankingTextStyle = TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700);
+  static BoxShadow normalShadow = BoxShadow(offset: Offset(0, -4), blurRadius: 5, spreadRadius: 0, color: Color(0xff2B44FF).withOpacity(0.2));
   static const forumGrey = Color(0xff7A757D);
   static const forumSubheaderStyle = TextStyle(color: forumGrey, fontSize: 14, fontWeight: FontWeight.w400);
   static const headerStyle = TextStyle(color: darkGrey, fontFamily: 'Poppins', fontWeight: FontWeight.w700, fontSize: 25);

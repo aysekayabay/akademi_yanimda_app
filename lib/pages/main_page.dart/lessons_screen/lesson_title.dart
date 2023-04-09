@@ -1,8 +1,9 @@
 import 'package:akademi_yanimda/models/lesson_model.dart';
 import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/video_content_screen.dart';
 import 'package:akademi_yanimda/services/card_info.dart';
-import 'package:akademi_yanimda/services/youtube_service.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utilities/styles.dart';
 
 class LessonTitle extends StatelessWidget {
   Konu konu;
@@ -23,22 +24,22 @@ class LessonTitle extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "${konu.isim} Eğitimleri",
-                    style: CardInfo.KONU_BASLIK,
-                  )),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "${konu.isim} Eğitimleri",
+                      style: CardInfo.KONU_BASLIK.copyWith(color: Styles.darkGrey),
+                    )),
+              ),
               SizedBox(height: 25),
               Padding(
                 padding: const EdgeInsets.only(right: 200),
                 child: Container(
                   padding: EdgeInsets.only(bottom: 5),
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom:
-                              BorderSide(color: Colors.indigo, width: 1.5))),
-                  child: Text("Eğitimler", style: CardInfo.KONU_BASLIK1),
+                  decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.indigo, width: 1.5))),
+                  child: Text("Eğitimler", style: CardInfo.KONU_BASLIK1.copyWith(color: Styles.buttonColor)),
                 ),
               ),
               SizedBox(height: 20),
@@ -76,15 +77,19 @@ class titleCard extends StatelessWidget {
           //leading: CircleAvatar(backgroundImage: AssetImage("assets/images${CardInfo.BASLIK[0]}.jpg"),),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  VideoContent(baslik: baslik,),
+              builder: (context) => VideoContent(
+                baslik: baslik,
+              ),
             ));
           },
-         
-          title: Text(baslik.konu.length.toString()),
+
+          title: Text(
+            baslik.konu.length.toString(),
+            style: TextStyle(color: Styles.messageDarkGrey),
+          ),
           subtitle: Text(
             baslik.konu,
-            style: CardInfo.KONU_ADI,
+            style: CardInfo.KONU_ADI.copyWith(color: Styles.messageDarkGrey),
           ),
           trailing: Icon(Icons.arrow_forward_ios_rounded),
         ),
