@@ -1,4 +1,5 @@
 import 'package:akademi_yanimda/utilities/styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class RankingScreen extends StatefulWidget {
@@ -9,63 +10,74 @@ class RankingScreen extends StatefulWidget {
 }
 
 class _RankingScreenState extends State<RankingScreen> {
+  Color baseLinearLightBlue = Color(0xff6F66FF);
+  Color baseLinearDarkBlue = Color(0xff001251);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: <Color>[
-          Color(0xff6F66FF),
-          Color(0xff001251),
-        ],
-        tileMode: TileMode.mirror,
-      )),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Header(),
-          rankHeader(),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: 20),
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                  gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xff686BFF), Color(0xff00061D)])),
-              child: Column(
-                children: [
-                  rankingItem(fullName: "Ad Soyad", no: "No", puan: "Puan", header: true),
-                  SizedBox(height: 10),
-                  rankingItem(fullName: "Ayşe", no: "4", puan: "18", header: false),
-                  rankingItem(fullName: "Mert", no: "5", puan: "10", header: false),
-                  rankingItem(fullName: "Canan", no: "6", puan: "7", header: false),
-                  rankingItem(fullName: "Süleyman", no: "7", puan: "5", header: false),
-                ],
-              ),
+    return Scaffold(
+        body: StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('users').orderBy('point').snapshots(),
+      builder: (context, snapshot) {
+        List<Row> clientList = [];
+        if (snapshot.hasData) {
+          final clientList = snapshot.data!.docs.reversed.toList();
+          var contLinearLightBlue = Color(0xff686BFF);
+          var contLinearDarkBlue = Color(0xff00061D);
+          return Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                baseLinearLightBlue,
+                baseLinearDarkBlue,
+              ],
+              tileMode: TileMode.mirror,
+            )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Header(),
+                // rankHeader(clientList),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [contLinearLightBlue, contLinearDarkBlue])),
+                    child: Column(
+                      children: [
+                        rankingItem(fullName: "Ad Soyad", no: "No", puan: "Puan", header: true),
+                        SizedBox(height: 10),
+                        // Column(
+                        //   children: List.generate(clientList.length - 3, (index) {
+                        //     return Row(
+                        //       children: [
+                        //         Text(clientList[index + 3]['name']),
+                        //         Text(clientList[index + 3]['point'].toString()),
+                        //       ],
+                        //     );
+                        //   }),
+                        // )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        } else if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    ));
   }
 
-  Widget Header() {
-    return Padding(
-      padding: EdgeInsets.only(left: 30, top: 40),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Puan Tablosu", style: Styles.rankHeaderStyle),
-          Text("Oyun ve Uygulama Akademisi", style: Styles.rankSubHeaderStyle),
-        ],
-      ),
-    );
-  }
-
-  Row rankHeader() {
+  Widget rankHeader(List<QueryDocumentSnapshot<Map<String, dynamic>>> clientList) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -77,7 +89,7 @@ class _RankingScreenState extends State<RankingScreen> {
               decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/polygon2.png"))),
               child: Text("2nd", style: Styles.rankingNum),
             ),
-            degreeContainer(title: "@mert", color: Styles.rankGrey),
+            degreeContainer(title: clientList[2]['name'], color: Styles.rankGrey),
             Text("2810", style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800))
           ],
         ),
@@ -88,7 +100,7 @@ class _RankingScreenState extends State<RankingScreen> {
               decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/polygon1.png"))),
               child: Text("1st", style: Styles.rankingNum),
             ),
-            degreeContainer(title: "@mert", color: Styles.rankYellow),
+            degreeContainer(title: clientList[1]['name'], color: Styles.rankYellow),
             Text("2810", style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800))
           ],
         ),
@@ -100,11 +112,33 @@ class _RankingScreenState extends State<RankingScreen> {
               decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/polygon3.png"))),
               child: Text("3rd", style: Styles.rankingNum),
             ),
-            degreeContainer(title: "@mert", color: Styles.rankOrange),
+            degreeContainer(title: clientList[2]['name'], color: Styles.rankOrange),
             Text("2810", style: Styles.buttonTextStyle.copyWith(fontWeight: FontWeight.w800)),
           ],
         ),
       ],
+    );
+  }
+
+  Widget Header() {
+    return Padding(
+      padding: EdgeInsets.only(left: 30, top: 40),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 2.0, right: 8),
+            child: InkWell(onTap: () => Navigator.of(context).pop(), child: Icon(Icons.arrow_back_outlined, color: Colors.white)),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Puan Tablosu", style: Styles.rankHeaderStyle),
+              Text("Oyun ve Uygulama Akademisi", style: Styles.rankSubHeaderStyle),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

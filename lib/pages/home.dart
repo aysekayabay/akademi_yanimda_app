@@ -5,6 +5,7 @@ import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+
 class HomeBar extends StatefulWidget {
   const HomeBar({super.key});
 

@@ -1,5 +1,7 @@
+import 'package:akademi_yanimda/models/user_model.dart';
 import 'package:akademi_yanimda/pages/auth_screen.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,24 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  UserModel? currentUser;
+  _fetchCurrentUser() async {
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
+      await FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid).get().then((value) {
+        setState(() {
+          currentUser = UserModel(value['fullName'], value['nickName'], value['email'], value['point'], value['userID']);
+        });
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCurrentUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     User user = FirebaseAuth.instance.currentUser!;
@@ -34,6 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 50),
               ProfileContainer(title: "Ad Soyad", value: user.displayName!),
+              ProfileContainer(title: "Kullanıcı Adı", value: currentUser?.nickName ?? ''),
               ProfileContainer(title: "Şifre", value: "********"),
               ProfileContainer(title: "E-posta", value: user.email!),
             ],

@@ -102,7 +102,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               formState.save();
                               print(registerForm);
                             }
-                            int success = await AuthService.instance.register(context, mailController.text, passwordController.text);
+                            int success = await AuthService.instance
+                                .register(context: context, email: mailController.text, password: passwordController.text, fullName: fullnameController.text, nickName: nicknameController.text);
                             if (success == 1) {
                               await FirebaseAuth.instance.currentUser?.updateDisplayName(fullnameController.text);
                               setState(() {
