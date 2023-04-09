@@ -33,7 +33,7 @@ class _LessonsScreenState extends State<LessonsScreen> {
       child: Column(
         children: [
           SizedBox(height: 80),
-          // Search(controller: _controller),
+           Search(controller: _controller),
           name(title: user!.displayName!),
           bar(),
           Column(

@@ -43,6 +43,7 @@ dependencies:
   cloud_firestore: ^4.5.0
   google_fonts: ^4.0.3
   google_nav_bar: ^5.0.6
+  smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:akademi_yanimda/services/youtube_service.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoContent extends StatefulWidget {
@@ -10,7 +11,8 @@ class VideoContent extends StatefulWidget {
 }
 
 class _VideoContentState extends State<VideoContent> {
-  final videoURL = YoutubeService.Konular[0].Basliklar[1].toString();
+  final videoURL =
+      "https://www.youtube.com/watch?v=RKwJwCaaFec&ab_channel=OyunveUygulamaAkademisi";
   late YoutubePlayerController _controller;
   @override
   void initState() {
@@ -34,29 +36,82 @@ class _VideoContentState extends State<VideoContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(onPressed: () {}, icon: Icon(Icons.close)),
+      ),
       body: Center(
         child: Column(
           children: [
-            Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                    onPressed: () {}, icon: Icon(Icons.keyboard_arrow_left))),
-            SizedBox(
-              height: 5,
+            SizedBox(height: 30),
+            Text(
+              "Başlık buraya gelecek",
+              style: GoogleFonts.inter(
+                fontSize: 18,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              actionsPadding: EdgeInsets.all(10),
-            )
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                      blurRadius: 10, spreadRadius: 4, color: Colors.black54)
+                ]),
+                child: YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: true,
+                  actionsPadding: EdgeInsets.all(10),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: 280,
+              height: 45,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Eğitmene Soru Sor",
+                  style: GoogleFonts.inter(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.black,
+                    elevation: 16,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    backgroundColor: Color.fromARGB(255, 111, 77, 190)),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: 280,
+              height: 45,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Topluluğa Soru Sor",
+                  style: GoogleFonts.inter(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.black,
+                    elevation: 16,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    backgroundColor: Color.fromARGB(255, 111, 77, 190)),
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 10,
-        backgroundColor: Colors.purple.shade600,
-        onPressed: () {},
-        child: Icon(Icons.add),
       ),
     );
   }
