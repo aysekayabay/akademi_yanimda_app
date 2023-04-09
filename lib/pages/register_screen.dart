@@ -1,6 +1,5 @@
 import 'package:akademi_yanimda/pages/auth_screen.dart';
 import 'package:akademi_yanimda/pages/home.dart';
-import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lessons_screen.dart';
 import 'package:akademi_yanimda/services/auth_service.dart';
 import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -109,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               setState(() {
                                 isSaving = false;
                               });
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              Navigator.pushReplacement(context, MaterialPageRoute(
                                 builder: (context) {
                                   return HomeBar();
                                 },

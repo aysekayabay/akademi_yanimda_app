@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _getWelcomeInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isViewed = prefs.getInt('welcome')?? 0;
+    isViewed = prefs.getInt('welcome') ?? 0;
   }
 
   @override
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _getWelcomeInfo();
     Future.delayed(
         Duration(seconds: 2),
-        () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+        () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
               return isViewed == 1 ? (FirebaseAuth.instance.currentUser != null ? HomeBar() : AuthScreen()) : WelcomeScreen();
             })));
   }
