@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
       body: Padding(
         padding: PaddingItems.horizontalPadding,
         child: Column(children: [
-          Image.asset('assets/images/logo.jpg.png'),
+          Image.asset('assets/images/logo.png'),
           Spacer(),
           ElevatedButton(
               onPressed: () {},

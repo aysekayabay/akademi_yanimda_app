@@ -18,7 +18,7 @@ class Styles {
   static const classicTextStyle = TextStyle(color: darkGrey, fontFamily: 'Poppins', fontWeight: FontWeight.w500, fontSize: 18);
   static const buttonColor = Color(0xff686BFF);
   static const cardBlue = Color(0xff466CFF);
-  static const cardPinh = Color(0xffEE97BC);
+  static const cardPink = Color(0xffEE97BC);
   static const lightPink = Color(0xffDED7F1);
   static const rankingNum = TextStyle(fontFamily: "Montserrat", fontSize: 30, fontWeight: FontWeight.w800);
 

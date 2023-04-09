@@ -40,7 +40,7 @@ class _LessonsScreenState extends State<LessonsScreen> {
             children: [
               LessonCard(name_count: 0, arkaplan_rengi: Styles.buttonColor),
               LessonCard(name_count: 1, arkaplan_rengi: Styles.cardBlue),
-              LessonCard(name_count: 0, arkaplan_rengi: Styles.cardPinh),
+              LessonCard(name_count: 0, arkaplan_rengi: Styles.cardPink),
             ],
           )
         ],

@@ -1,12 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:akademi_yanimda/pages/main_page.dart/lessons_screen/lesson_title.dart';
 import 'package:akademi_yanimda/services/card_info.dart';
+import 'package:akademi_yanimda/utilities/styles.dart';
 import 'package:flutter/material.dart';
 
 class LessonCard extends StatelessWidget {
-  LessonCard(
-      {super.key, required this.name_count, required this.arkaplan_rengi});
+  LessonCard({super.key, required this.name_count, required this.arkaplan_rengi});
   late int name_count;
   late Color arkaplan_rengi;
   @override
@@ -14,7 +13,7 @@ class LessonCard extends StatelessWidget {
     debugPrint(CardInfo.DERS_ADI[name_count]);
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.0),
+      padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
       child: Container(
         padding: EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width,
@@ -26,64 +25,58 @@ class LessonCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Positioned(
-              child: Text(
-                CardInfo.BASLIK,
-                style: CardInfo.BASLIK_STYLE,
-              ),
-              top: 15,
-              right: 90,
-              left: 15,
-            ),
-            Positioned(
-              child: Text(
-                CardInfo.DERS_ADI[name_count],
-                style: CardInfo.AD_STYLE,
-              ),
-              top: 60,
-              right: 120,
-              left: 15,
-            ),
-            Positioned(
-              child: ElevatedButton(
-                  child: Text(
-                    "Başla",
-                    style: TextStyle(color: Colors.indigo.shade300),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: StadiumBorder(),
-                      fixedSize: Size(60, 20)),
-                  onPressed: () {}),
-              top: 95,
-              right: 140,
-              left: 15,
-            ),
-            Positioned(
-              child: Container(
-                margin: EdgeInsets.only(left: 30, right: 30),
-                width: 10,
-                child: Center(
-                    child: Text(
-                  "01/30",
-                  style: TextStyle(color: Colors.white),
-                )),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(10),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      CardInfo.BASLIK,
+                      style: CardInfo.BASLIK_STYLE,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                      child: Center(child: Text("01/30", style: TextStyle(color: Colors.white))),
+                      decoration: BoxDecoration(
+                        color: Colors.white24,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              top: 15,
-              right: -20,
-              left: 160,
-            ),
-            Positioned(
-              child: Image(
-                  image: AssetImage(
-                      "assets/images/${CardInfo.DERS_ADI[name_count]}.jpg")),
-              top: 60,
-              right: 30,
-              left: 150,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          CardInfo.DERS_ADI[name_count],
+                          style: CardInfo.AD_STYLE.copyWith(color: Colors.white),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          decoration: ShapeDecoration(shape: StadiumBorder(), color: Colors.white),
+                          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                          child: Text(
+                            "Başla",
+                            style: TextStyle(color: Styles.darkPurp),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 20, top: 20),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Image(
+                        image: AssetImage("assets/images/${CardInfo.DERS_ADI[name_count]}.png"),
+                        height: 90,
+                        width: 90,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
