@@ -7,13 +7,7 @@ class CollectionCard extends StatelessWidget {
   String resim;
   double topPositioned;
   double leftPositioned;
-  CollectionCard(
-      {super.key,
-      required this.topPositioned,
-      required this.leftPositioned,
-      required this.title,
-      required this.subtitle,
-      required this.resim});
+  CollectionCard({super.key, required this.topPositioned, required this.leftPositioned, required this.title, required this.subtitle, required this.resim});
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +36,12 @@ class CollectionCard extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 3),
                   Container(
                     alignment: Alignment.center,
                     width: 140,
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white)),
+                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
                       onPressed: () {},
                       child: Row(
                         children: [
@@ -82,9 +74,7 @@ class CollectionCard extends StatelessWidget {
       ),
       width: 220,
       height: 220,
-      decoration: BoxDecoration(
-          image:
-              DecorationImage(image: AssetImage("assets/images/${resim}.png"))),
+      decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/${resim}.png"))),
     );
   }
 }

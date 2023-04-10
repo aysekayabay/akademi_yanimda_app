@@ -77,6 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }),
                   CustomAuthField(
                       label: "Şifre",
+                      obsecure: true,
                       validator: (p0) {
                         if (p0?.isNotEmpty != true || (p0?.isNotEmpty == true && p0!.length < 6)) {
                           return 'Girdiğiniz şifre en az 6 karakter içermelidir.';
@@ -131,8 +132,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 }
 
 class CustomAuthField extends StatelessWidget {
-  const CustomAuthField({super.key, required this.controller, this.onSaved, required this.label, this.validator});
+  const CustomAuthField({super.key, required this.controller, this.onSaved, required this.label, this.validator, this.obsecure = false});
   final String label;
+  final bool obsecure;
   final TextEditingController controller;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
@@ -140,6 +142,7 @@ class CustomAuthField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        obscureText: obsecure,
         validator: validator,
         style: Styles.classicTextStyle,
         controller: controller,

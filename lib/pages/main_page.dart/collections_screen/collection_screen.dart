@@ -18,8 +18,9 @@ class _CollectionScreenState extends State<CollectionScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: 80),
-          Text("Koleksiyonum Yakında", style: GoogleFonts.inter(color: Colors.grey.shade800, fontSize: 22, fontWeight: FontWeight.w900)),
+          SizedBox(height: 120),
+          Text("Koleksiyon Sayfası ", style: GoogleFonts.inter(color: Colors.grey.shade800, fontSize: 22, fontWeight: FontWeight.w900)),
+          Text("YAKINDA", style: GoogleFonts.inter(color: Colors.grey.shade800, fontSize: 22, fontWeight: FontWeight.w900)),
           SizedBox(
             height: 40,
           ),

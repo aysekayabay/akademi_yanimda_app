@@ -15,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool isGoogle = false;
   UserModel? currentUser;
   bool isLoading = true;
   _fetchCurrentUser() async {
@@ -23,6 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid).get().then((value) {
         setState(() {
           currentUser = UserModel(value['fullName'], value['nickName'], value['email'], value['point'], value['userID'], value['firstQuestion']);
+          isGoogle = value['google'];
           isLoading = false;
         });
       });
@@ -65,7 +67,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 MainButton(
                     onTap: () async {
-                      await signOutWithGoogle();
+                      if (isGoogle == true) {
+                        await signOutWithGoogle();
+                      } else {
+                        await FirebaseAuth.instance.signOut();
+                      }
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) {
                           return AuthScreen();

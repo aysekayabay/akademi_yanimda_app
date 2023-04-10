@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text("Giriş Yap", style: Styles.headerStyle),
                 SizedBox(height: MediaQuery.of(context).size.height / 6),
                 CustomAuthField(controller: mailController, label: 'Email', onSaved: (p0) {}),
-                CustomAuthField(controller: passwordController, label: 'Şifre', onSaved: (p0) {}),
+                CustomAuthField(controller: passwordController, label: 'Şifre', obsecure: true, onSaved: (p0) {}),
                 SizedBox(height: 50),
                 isSaving
                     ? Center(child: CircularProgressIndicator())

@@ -28,31 +28,33 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 60),
-            HeaderText(title: "Hesabınız var mı?", bottomPadding: 10),
-            SubHeaderText(title: "Gelişmeye devam et", bottomPadding: 20),
-            MainButton(
-              isFilled: true,
-              title: "Giriş Yap",
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
-              },
-            ),
-            Divider(height: 80),
-            HeaderText(title: "Buralarda yeni misin?", bottomPadding: 10),
-            SubHeaderText(title: "Öğrenmeye hemen başla", bottomPadding: 20),
-            MainButton(
-                isFilled: false,
-                title: "Kayıt Ol",
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 150),
+              HeaderText(title: "Hesabınız var mı?", bottomPadding: 10),
+              SubHeaderText(title: "Gelişmeye devam et", bottomPadding: 20),
+              MainButton(
+                isFilled: true,
+                title: "Giriş Yap",
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
-                }),
-            SizedBox(height: 100),
-            GoogleSignButton()
-          ],
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
+              ),
+              Divider(height: 80),
+              HeaderText(title: "Buralarda yeni misin?", bottomPadding: 10),
+              SubHeaderText(title: "Öğrenmeye hemen başla", bottomPadding: 20),
+              MainButton(
+                  isFilled: false,
+                  title: "Kayıt Ol",
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
+                  }),
+              SizedBox(height: 100),
+              GoogleSignButton()
+            ],
+          ),
         ),
       ),
     );
@@ -64,7 +66,16 @@ class _AuthScreenState extends State<AuthScreen> {
           await signInWithGoogle();
           User user = FirebaseAuth.instance.currentUser!;
           await FirebaseFirestore.instance.collection('users').doc(user.uid).set(
-            {'email': user.email, 'userID': user.uid, 'created': FieldValue.serverTimestamp(), 'point': 0, 'fullName': user.displayName, 'nickName': user.displayName, 'firstQuestion': 0},
+            {
+              'email': user.email,
+              'userID': user.uid,
+              'created': FieldValue.serverTimestamp(),
+              'point': 0,
+              'fullName': user.displayName,
+              'nickName': user.displayName,
+              'firstQuestion': 0,
+              'google': true
+            },
             SetOptions(merge: true),
           );
           navigateToHome();
