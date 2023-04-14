@@ -1,4 +1,4 @@
-# akademi_yanimda
+# Akademi Yanımda - Oyun ve Uygulama Akademisi F-67
 
 A new Flutter project.
 
