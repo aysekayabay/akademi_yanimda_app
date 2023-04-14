@@ -1,16 +1,12 @@
 # Akademi Yanımda - Oyun ve Uygulama Akademisi F-67
 
-A new Flutter project.
 
-## Getting Started
+## Takımımız
+* Ali Osman Yalçın
+* Ayşe Kayabay
+* İzzet Jumaev
+* Mert Dirgar
+* Sümeyra Aydemir
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Kullandığımız Teknolojiler
+`cupertino_icons: ^1.0.2` `firebase_core: ^2.9.0` `firebase_auth: ^4.4.0` `google_sign_in: ^6.1.0` `youtube_player_flutter: ^8.1.2` `cloud_firestore: ^4.5.0` `google_fonts: ^4.0.3` `google_nav_bar: ^5.0.6` `smooth_page_indicator: ^1.0.1` `shared_preferences: ^2.1.0` `flutter_riverpod: ^2.3.4`
