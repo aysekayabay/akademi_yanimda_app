@@ -1,5 +1,5 @@
 # Akademi Yanımda - Oyun ve Uygulama Akademisi F-67
-
+Oyun ve Uygulama Akademisi 2022-2023 dönemi AppJam'i 2.'si olmamızı sağlayan bu uygulamayı F-67 takımı olarak tasarladık ve kodunu yazdık.
 
 ## Takımımız
 * Ali Osman Yalçın
