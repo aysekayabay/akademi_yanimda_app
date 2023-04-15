@@ -4,7 +4,7 @@ Oyun ve Uygulama Akademisi 2022-2023 dönemi AppJam'i 2.'si olmamızı sağlayan
 ## Takımımız
 * Ali Osman Yalçın
 * Ayşe Kayabay
-* İzzet Jumaev
+* [İzzet Jumaev](https://github.com/izzetJmy)
 * Mert Dirgar
 * Sümeyra Aydemir
 
